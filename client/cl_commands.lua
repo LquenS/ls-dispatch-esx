@@ -67,25 +67,27 @@ RegisterCommand('911', function(source, args, rawCommand)
             PhoneCallAnim()
             Wait(math.random(3,8) * 1000)
             playAnim = false
-            local plyData = QBCore.GetPlayerData()
-            local currentPos = GetEntityCoords(PlayerPedId())
-            local locationInfo = getStreetandZone(currentPos)
-            local gender = GetPedGender()
-            TriggerServerEvent("dispatch:server:notify",{
-                dispatchcodename = "911call", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
-                dispatchCode = "911",
-                firstStreet = locationInfo,
-                priority = 2, -- priority
-                name = plyData.firstName:sub(1,1):upper()..plyData.firstName:sub(2).. " ".. plyData.lastName:sub(1,1):upper()..plyData.lastName:sub(2),
-                origin = {
-                    x = currentPos.x,
-                    y = currentPos.y,
-                    z = currentPos.z
-                },
-                dispatchMessage = "Incoming Call", -- message
-                information = msg,
-                job = {"police", "ambulance"} -- jobs that will get the alerts
-            })
+			QBCore.TriggerServerCallback('ls-dispatch:s:getName', function(name)
+				local plyData = QBCore.GetPlayerData()
+				local currentPos = GetEntityCoords(PlayerPedId())
+				local locationInfo = getStreetandZone(currentPos)
+				local gender = GetPedGender()
+				TriggerServerEvent("dispatch:server:notify",{
+					dispatchcodename = "911call", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
+					dispatchCode = "911",
+					firstStreet = locationInfo,
+					priority = 2, -- priority
+					name = name,
+					origin = {
+						x = currentPos.x,
+						y = currentPos.y,
+						z = currentPos.z
+					},
+					dispatchMessage = "Incoming Call", -- message
+					information = msg,
+					job = {"police", "ambulance"} -- jobs that will get the alerts
+				})
+			end)
             Wait(1000)
             DeletePhone()
             StopEntityAnim(PlayerPedId(), 'cellphone_text_to_call', "cellphone@", 3)
@@ -141,25 +143,27 @@ RegisterCommand('311', function(source, args, rawCommand)
             PhoneCallAnim()
             Wait(math.random(3,8) * 1000)
             playAnim = false
-            local plyData = QBCore.GetPlayerData()
-            local currentPos = GetEntityCoords(PlayerPedId())
-            local locationInfo = getStreetandZone(currentPos)
-            local gender = GetPedGender()
-            TriggerServerEvent("dispatch:server:notify",{
-                dispatchcodename = "311call", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
-                dispatchCode = "311",
-                firstStreet = locationInfo,
-                priority = 2, -- priority
-                name = plyData.firstName:sub(1,1):upper()..plyData.firstName:sub(2).. " ".. plyData.lastName:sub(1,1):upper()..plyData.lastName:sub(2),
-                origin = {
-                    x = currentPos.x,
-                    y = currentPos.y,
-                    z = currentPos.z
-                },
-                dispatchMessage = "Incoming Call", -- message
-                information = msg,
-                job = {"police", "ambulance"} -- jobs that will get the alerts
-            })
+			QBCore.TriggerServerCallback('ls-dispatch:s:getName', function(name)
+				local plyData = QBCore.GetPlayerData()
+				local currentPos = GetEntityCoords(PlayerPedId())
+				local locationInfo = getStreetandZone(currentPos)
+				local gender = GetPedGender()
+				TriggerServerEvent("dispatch:server:notify",{
+					dispatchcodename = "311call", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
+					dispatchCode = "311",
+					firstStreet = locationInfo,
+					priority = 2, -- priority
+					name = name,
+					origin = {
+						x = currentPos.x,
+						y = currentPos.y,
+						z = currentPos.z
+					},
+					dispatchMessage = "Incoming Call", -- message
+					information = msg,
+					job = {"police", "ambulance"} -- jobs that will get the alerts
+				})
+			end)
             Wait(1000)
             DeletePhone()
             StopEntityAnim(PlayerPedId(), 'cellphone_text_to_call', "cellphone@", 3)

@@ -1,4 +1,5 @@
 local QBCore = exports['es_extended']:getSharedObject()
+local LS_CORE = exports["ls-core"]:GetCoreObject()
 local calls = {}
 
 function _U(entry)
@@ -99,6 +100,19 @@ RegisterNetEvent("dispatch:removeUnit", function(callid, player, cb)
         end
         cb(calls[callid])
     end    
+end)
+
+QBCore.RegisterServerCallback('ls-dispatch:s:getName', function(source, cb)
+    local tPlayer = QBCore.GetPlayerFromId(source)
+
+    local result = LS_CORE.Config.DATABASE( LS_CORE.Config.DATABASE_NAME, 'fetchAll', 'SELECT firstname, lastname FROM users WHERE identifier = @identifier', {
+        ['@identifier'] = tPlayer.identifier
+    })
+    local _player = "NAME NAME"
+    if result[1] then
+        _player = result[1].firstname .. " " .. result[1].lastname
+    end
+	cb(_player)
 end)
 
 function GetDispatchCalls() 

@@ -178,8 +178,10 @@ end
 
 local function IsValidJob(jobList)
 	for k, v in pairs(jobList) do
-		if v == PlayerJob.name then
-			return true
+		if PlayerJob ~= nil then
+			if v == PlayerJob.name then
+				return true
+			end
 		end
 	end
 	return false
