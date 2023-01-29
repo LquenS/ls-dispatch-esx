@@ -33,7 +33,7 @@ end)
 RegisterNetEvent("dispatch:respondWithHotkey", function(callid)
     local tPlayer = QBCore.GetPlayerFromId(source)
 
-    local result = MySQL.Sync.fetchAll('SELECT firstname, lastname FROM users WHERE identifier = @identifier', {
+    local result = LS_CORE.Config.DATABASE( LS_CORE.Config.DATABASE_NAME, 'fetchAll', 'SELECT firstname, lastname FROM users WHERE identifier = @identifier', {
         ['@identifier'] = tPlayer.identifier
     })
     local _player = "NAME NAME"
