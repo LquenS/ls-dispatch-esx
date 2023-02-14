@@ -386,3 +386,7 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
+RegisterNetEvent("dispatch:c:respondWaypoint", function(newdisp)
+	SetNewWaypoint(newdisp.origin.x, newdisp.origin.y)
+end)
