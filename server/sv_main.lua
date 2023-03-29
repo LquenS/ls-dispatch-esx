@@ -63,8 +63,8 @@ RegisterNetEvent("dispatch:respondWithHotkey", function(callid)
         elseif player.job.name == 'ambulance' then
             calls[callid].units[units_count+1] = { identifier = player.identifier, fullname = player.fullname, job = 'EMS', callsign = player.callsign }
         end
-		TriggerClientEvent("dispatch:c:respondWaypoint", source, calls[callid])
-		TriggerClientEvent("ls-mdt:c:respondToCall", source)
+		TriggerClientEvent("dispatch:c:respondWaypoint", tPlayer.source, calls[callid])
+		TriggerClientEvent("ls-mdt:c:respondToCall", tPlayer.source)
     end
 end)
 
